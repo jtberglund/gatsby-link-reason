@@ -2,7 +2,7 @@
     "name": "gatsby-link-reason",
     "version": "1.0.0-rc.0",
     "description": "ReasonML wrapper around gatsby-link",
-    "main": "index.js",
+    "main": "src/GatsbyLink.re",
     "scripts": {
         "build": "bsb -make-world",
         "clean": "bsb -clean"
