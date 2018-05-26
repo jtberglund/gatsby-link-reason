@@ -1,6 +1,6 @@
 {
     "name": "gatsby-link-reason",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "ReasonML wrapper around gatsby-link",
     "main": "src/GatsbyLink.re",
     "scripts": {
