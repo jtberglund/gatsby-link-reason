@@ -31,8 +31,8 @@ let make =
       "activeClassName": Js.Nullable.fromOption(activeClassName),
       "exact": Js.Nullable.fromOption(exact),
       "strict": Js.Nullable.fromOption(strict),
-      "isActive": isActive,
-      "location": location
+      "isActive": Js.Nullable.fromOption(isActive),
+      "location": Js.Nullable.fromOption(location)
     },
     children
   );
