@@ -1,18 +1,12 @@
 {
-    "name": "gatsby-starter-reason",
-    "namespace": true,
+    "name": "gatsby-link-reason",
     "reason": { "react-jsx": 2 },
     "bs-dependencies": ["reason-react"],
-    "sources": [
-        {
-            "dir": "src",
-            "subdirs": true
-        }
-    ],
+    "sources": ["src"],
     "package-specs": [
         {
             "module": "commonjs",
-            "in-source": false
+            "in-source": true
         }
     ],
     "suffix": ".bs.js",

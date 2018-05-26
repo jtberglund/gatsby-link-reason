@@ -20,13 +20,13 @@
     "license": "MIT",
     "devDependencies": {
         "bs-platform": "^3.0.0",
-        "reason-react": "^0.4.1"
-    },
-    "dependencies": {
-        "gatsby-link": "^1.6.41"
+        "gatsby-link": "^1.6.41",
+        "reason-react": "^0.4.2"
     },
     "peerDependencies": {
         "bs-platform": "^3.0.0",
+        "gatsby": "^1.0.0",
+        "gatsby-link": "^1.6.41",
         "reason-react": "^0.4.1"
     }
 }
