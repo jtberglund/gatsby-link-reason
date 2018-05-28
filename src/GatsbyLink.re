@@ -6,6 +6,33 @@ external gatsbyLink : ReasonReact.reactClass = "default";
 [@bs.module "gatsby-link"]
 external withPrefix : string => string = "withPrefix";
 
+[@bs.deriving abstract]
+type jsProps = {
+  [@bs.as "to"] to_: string,
+  activeStyle: Js.nullable(ReactDOMRe.Style.t),
+  style: Js.nullable(ReactDOMRe.Style.t),
+  innerRef: Js.nullable(ReasonReact.reactRef),
+  onClick: Js.nullable(ReactEventRe.Mouse.t => unit),
+  activeClassName: Js.nullable(string),
+  exact: Js.nullable(bool),
+  strict: Js.nullable(bool)
+};
+
+/* TODO figure out a type-safe way to filter out undefined properties from props */
+let filterProps: jsProps => jsProps = [%raw
+  {|
+  function(props) {
+    var newProps = {};
+    for(var key in props) {
+      if(props[key] !== undefined) {
+        newProps[key] = props[key];
+      }
+    }
+    return newProps;
+  }
+|}
+];
+
 let make =
     (
       ~to_: string,
@@ -16,26 +43,24 @@ let make =
       ~activeClassName: option(string)=?,
       ~exact: option(bool)=?,
       ~strict: option(bool)=?,
-      ~isActive=?,
-      ~location=?,
       children
-    ) =>
+    ) => {
+  let jsProps = jsProps(
+    ~to_,
+    ~activeStyle=Js.Nullable.fromOption(activeStyle),
+    ~innerRef=Js.Nullable.fromOption(innerRef),
+    ~style=Js.Nullable.fromOption(style),
+    ~onClick=Js.Nullable.fromOption(onClick),
+    ~activeClassName=Js.Nullable.fromOption(activeClassName),
+    ~exact=Js.Nullable.fromOption(exact),
+    ~strict=Js.Nullable.fromOption(strict)
+  );
   ReasonReact.wrapJsForReason(
     ~reactClass=gatsbyLink,
-    ~props={
-      "to": to_,
-      "activeStyle": Js.Nullable.fromOption(activeStyle),
-      "innerRef": Js.Nullable.fromOption(innerRef),
-      "style": Js.Nullable.fromOption(style),
-      "onClick": Js.Nullable.fromOption(onClick),
-      "activeClassName": Js.Nullable.fromOption(activeClassName),
-      "exact": Js.Nullable.fromOption(exact),
-      "strict": Js.Nullable.fromOption(strict),
-      "isActive": Js.Nullable.fromOption(isActive),
-      "location": Js.Nullable.fromOption(location)
-    },
+    ~props=filterProps(jsProps),
     children
   );
+};
 
 let navigateTo = navigateTo;
 
