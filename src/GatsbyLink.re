@@ -1,9 +1,9 @@
-[@bs.module "gatsby-link"]
-external gatsbyLink : ReasonReact.reactClass = "default";
+[@bs.module "gatsby"]
+external gatsbyLink : ReasonReact.reactClass = "Link";
 
-[@bs.module "gatsby-link"] external navigateTo : string => unit = "navigateTo";
+[@bs.module "gatsby"] external navigateTo : string => unit = "navigateTo";
 
-[@bs.module "gatsby-link"]
+[@bs.module "gatsby"]
 external withPrefix : string => string = "withPrefix";
 
 [@bs.deriving abstract]
