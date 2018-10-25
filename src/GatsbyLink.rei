@@ -6,6 +6,7 @@ let make:
     ~innerRef: ReasonReact.reactRef=?,
     ~onClick: ReactEvent.Mouse.t => unit=?,
     ~activeClassName: string=?,
+    ~className: string=?,
     ~exact: bool=?,
     ~strict: bool=?,
     'a
