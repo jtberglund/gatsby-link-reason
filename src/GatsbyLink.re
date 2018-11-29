@@ -18,21 +18,6 @@ type jsProps = {
   strict: Js.nullable(bool),
 };
 
-/* TODO figure out a type-safe way to filter out undefined properties from props */
-let filterProps: jsProps => jsProps = [%raw
-  {|
-  function(props) {
-    var newProps = {};
-    for(var key in props) {
-      if(props[key] !== undefined) {
-        newProps[key] = props[key];
-      }
-    }
-    return newProps;
-  }
-|}
-];
-
 let make =
     (
       ~to_: string,
@@ -44,10 +29,11 @@ let make =
       ~className: option(string)=?,
       ~exact: option(bool)=?,
       ~strict: option(bool)=?,
-      children,
+      _children,
     ) => {
-  let jsProps =
-    jsProps(
+  ReasonReact.wrapJsForReason(
+    ~reactClass=gatsbyLink,
+    ~props=jsProps(
       ~to_,
       ~activeStyle=Js.Nullable.fromOption(activeStyle),
       ~innerRef=Js.Nullable.fromOption(innerRef),
@@ -57,11 +43,8 @@ let make =
       ~className=Js.Nullable.fromOption(className),
       ~exact=Js.Nullable.fromOption(exact),
       ~strict=Js.Nullable.fromOption(strict),
-    );
-  ReasonReact.wrapJsForReason(
-    ~reactClass=gatsbyLink,
-    ~props=filterProps(jsProps),
-    children,
+    ),
+    _children,
   );
 };
 
